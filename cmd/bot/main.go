@@ -1,11 +1,12 @@
 package main
 
 import (
-	"about-me/pkg/config"
-	"about-me/pkg/telegram"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+
+	"about-me/pkg/config"
+	"about-me/pkg/telegram"
 )
 
 func main() {
