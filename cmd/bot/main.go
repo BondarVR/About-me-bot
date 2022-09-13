@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -14,9 +15,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	token := cfg.Token
+	fmt.Printf("cfg.Token: '%v'\n", cfg.Token)
 
-	bot, err := tgbotapi.NewBotAPI(token)
+	bot, err := tgbotapi.NewBotAPI(cfg.Token)
 	if err != nil {
 		log.Panic(err)
 	}
