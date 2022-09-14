@@ -40,11 +40,10 @@ func (b *Bot) handleMessage(message *tgbotapi.Message) error {
 
 // Process command from the update and send back
 func (b *Bot) handleCommand(message *tgbotapi.Message) error {
-	msg := tgbotapi.NewMessage(message.Chat.ID, "There is no such command, enter /help")
+	msg := tgbotapi.NewMessage(message.Chat.ID, "")
 	switch message.Command() {
 	case commandStart:
 		msg.Text = replyStartAndHelp
-		//msg.ReplyToMessageID = message.MessageID
 		_, err := b.bot.Send(msg)
 		return err
 	case commandHelp:
@@ -61,7 +60,9 @@ func (b *Bot) handleCommand(message *tgbotapi.Message) error {
 		_, err := b.bot.Send(msg)
 		return err
 	default:
-		_, err := b.bot.Send(msg)
-		return err
+		if err := b.handleMessage(message); err != nil {
+			return err
+		}
+		return nil
 	}
 }

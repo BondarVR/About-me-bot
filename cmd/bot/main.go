@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"github.com/joho/godotenv"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -11,11 +11,15 @@ import (
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	cfg, err := config.NewConfig()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("cfg.Token: '%v'\n", cfg.Token)
 
 	bot, err := tgbotapi.NewBotAPI(cfg.Token)
 	if err != nil {
