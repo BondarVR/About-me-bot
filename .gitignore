@@ -1,0 +1,14 @@
+.idea
+.bin
+.env
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+vendor/
+.idea/
+.vscode/
+keys/
+examples/
