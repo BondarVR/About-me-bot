@@ -23,7 +23,7 @@ func main() {
 
 	bot, err := tgbotapi.NewBotAPI(cfg.Token)
 	if err != nil {
-		log.Panic(err)
+		log.Fatalf("tgbotapi.NewBotAPI() failed. Error: '%v'\n", err)
 	}
 
 	bot.Debug = true

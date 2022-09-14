@@ -1,6 +1,7 @@
 package telegram
 
 import (
+	"errors"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
@@ -60,9 +61,6 @@ func (b *Bot) handleCommand(message *tgbotapi.Message) error {
 		_, err := b.bot.Send(msg)
 		return err
 	default:
-		if err := b.handleMessage(message); err != nil {
-			return err
-		}
-		return nil
+		return errors.New("Invalid type of message. Cant send message")
 	}
 }
