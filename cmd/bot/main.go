@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	"log"
-
+	"about-me/pkg/logging"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/joho/godotenv"
+	log "github.com/sirupsen/logrus"
 
 	"about-me/pkg/config"
 	"about-me/pkg/telegram"
 )
 
 func main() {
+	logging.Init()
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
