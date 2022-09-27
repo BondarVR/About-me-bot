@@ -1,24 +1,26 @@
 package telegram
 
 import (
-	"about-me/pkg/logging"
-	log "github.com/sirupsen/logrus"
+	"about-me/pkg/logger"
+	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type Bot struct {
 	bot *tgbotapi.BotAPI
+	lgr *logger.LogrusLogger
 }
 
-func NewBot(bot *tgbotapi.BotAPI) *Bot {
-	return &Bot{bot: bot}
+func NewBot(bot *tgbotapi.BotAPI, lgr *logger.LogrusLogger) *Bot {
+	return &Bot{bot: bot,
+		lgr: lgr,
+	}
 }
 
 // Start (starts the bot)
 func (b *Bot) Start() error {
-	logging.Init()
-	log.Infof("Authorized on account %s", b.bot.Self.UserName)
+	log.Printf("Authorized on account %s", b.bot.Self.UserName)
 	updates := b.initUpdatesChannel()
 	if err := b.handleUpdates(updates); err != nil {
 		return err

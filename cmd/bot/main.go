@@ -1,23 +1,25 @@
 package main
 
 import (
-	"about-me/pkg/logging"
+	"about-me/pkg/logger"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/joho/godotenv"
-	log "github.com/sirupsen/logrus"
+	"log"
 
 	"about-me/pkg/config"
 	"about-me/pkg/telegram"
 )
 
 func main() {
-	logging.Init()
-	err := godotenv.Load()
+	cfg, err := config.NewConfig()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal(err)
 	}
 
-	cfg, err := config.NewConfig()
+	lgr, err := logger.New(logger.Config{
+		LogLevel:    cfg.LogLevel,
+		LogServer:   cfg.LogServer,
+		ServiceName: cfg.ServiceName,
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -29,7 +31,7 @@ func main() {
 
 	bot.Debug = true
 
-	telegramBot := telegram.NewBot(bot)
+	telegramBot := telegram.NewBot(bot, lgr)
 	if err := telegramBot.Start(); err != nil {
 		log.Fatal(err)
 	}
