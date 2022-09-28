@@ -1,7 +1,7 @@
 package telegram
 
 import (
-	"about-me/pkg/logger"
+	"about-me/internal/logger"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
