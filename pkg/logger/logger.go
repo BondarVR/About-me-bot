@@ -7,9 +7,42 @@ import (
 	"time"
 )
 
+type Logger interface {
+	Info(args ...interface{})
+	Error(args ...interface{})
+	Fatal(args ...interface{})
+	Infof(format string, args ...interface{})
+	Errorf(format string, args ...interface{})
+	Fatalf(format string, args ...interface{})
+}
+
 type LogrusLogger struct {
 	logrus *logrus.Logger
 	entry  *logrus.Entry
+}
+
+func (l *LogrusLogger) Info(args ...interface{}) {
+	l.entry.Info(args...)
+}
+
+func (l *LogrusLogger) Infof(format string, args ...interface{}) {
+	l.entry.Infof(format, args...)
+}
+
+func (l *LogrusLogger) Error(args ...interface{}) {
+	l.entry.Error(args...)
+}
+
+func (l *LogrusLogger) Errorf(format string, args ...interface{}) {
+	l.entry.Errorf(format, args...)
+}
+
+func (l *LogrusLogger) Fatal(args ...interface{}) {
+	l.entry.Fatal(args...)
+}
+
+func (l *LogrusLogger) Fatalf(format string, args ...interface{}) {
+	l.entry.Fatalf(format, args...)
 }
 
 type Config struct {

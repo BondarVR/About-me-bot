@@ -21,18 +21,18 @@ func main() {
 		ServiceName: cfg.ServiceName,
 	})
 	if err != nil {
-		log.Fatal(err)
+		lgr.Fatal(err)
 	}
 
 	bot, err := tgbotapi.NewBotAPI(cfg.Token)
 	if err != nil {
-		log.Fatalf("tgbotapi.NewBotAPI() failed. Error: '%v'\n", err)
+		lgr.Fatalf("tgbotapi.NewBotAPI() failed. Error: '%v'\n", err)
 	}
 
 	bot.Debug = true
 
 	telegramBot := telegram.NewBot(bot, lgr)
 	if err := telegramBot.Start(); err != nil {
-		log.Fatal(err)
+		lgr.Fatal(err)
 	}
 }

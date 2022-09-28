@@ -3,7 +3,6 @@ package config
 import (
 	"github.com/caarlos0/env/v6"
 	"github.com/joho/godotenv"
-	"log"
 )
 
 type Config struct {
@@ -17,7 +16,7 @@ type Config struct {
 func NewConfig() (*Config, error) {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		return nil, err
 	}
 
 	var config Config
