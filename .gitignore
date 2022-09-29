@@ -2,6 +2,7 @@
 .bin
 .env
 *.exe
+*.log
 *.exe~
 *.dll
 *.so
